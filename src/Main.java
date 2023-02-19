@@ -26,14 +26,14 @@ public class Main {
         return currency.format(number);
     }
 
-    public static String calculateMortgage(double principal, double monthlyRate, int numberOfPayments) {
+    public static String calculateMortgage(double principal, float monthlyRate, byte numberOfPayments) {
         /* Calculate mortgage and return as a currency */
         double mortgage = principal * monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments) / (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
 
         return formatCurrency(mortgage);
     }
 
-    public static void paymentSchedule(double principal, int numberOfPayments, double monthlyRate) {
+    public static void paymentSchedule(double principal, byte numberOfPayments, float monthlyRate) {
         /* Display the payment schedule */
         for (int i = 1; i <= numberOfPayments; i++) {
             double installment = principal * (Math.pow((1 + monthlyRate), numberOfPayments) - Math.pow((1 + monthlyRate), i)) / (Math.pow((1 + monthlyRate), numberOfPayments) - 1);
@@ -43,11 +43,11 @@ public class Main {
 
     public static void main(String[] args) {
         double principal = readNumber("Principal ($1K - $1M): ", 1000, 1_000_000);
-        double annualRate = readNumber("Annual Interest Rate: ", 1, 30);
-        int period = (int)readNumber("Period (Years): ", 1, 30);
+        float annualRate = (float)readNumber("Annual Interest Rate: ", 1, 30);
+        byte period = (byte)readNumber("Period (Years): ", 1, 30);
 
-        double monthlyRate = annualRate / 100 / 12;
-        int numberOfPayments = period * 12;
+        float monthlyRate = annualRate / 100 / 12;
+        byte numberOfPayments = (byte) (period * 12);
 
         System.out.println("MORTGAGE");
         System.out.println("--------------");
